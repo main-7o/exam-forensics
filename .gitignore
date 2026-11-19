@@ -1,0 +1,6 @@
+__pycache__/
+*.egg-info/
+sample/
+report/
+# 실제 수험생 데이터는 절대 커밋하지 마세요
+*.csv

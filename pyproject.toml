@@ -1,0 +1,18 @@
+[project]
+name = "exam-forensics"
+version = "0.4.0"
+description = "Local-only statistical forensics for exam answer sharing and AI-assisted cheating"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+anthropic = ["anthropic"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["exam_forensics"]
