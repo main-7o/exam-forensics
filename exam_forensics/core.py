@@ -296,7 +296,7 @@ def lsh_candidates(responses, key, n_options, rows=None, n_lsh=40, min_wrong=4, 
 
     rows(해시 묶음 크기)는 인원에 따라 자동으로 커진다: 1만 명 5, 10만 명 7, 55만 명 8.
     후보 수를 n에 거의 비례하게 묶는 대신, 부분 베끼기의 재현율이 떨어진다.
-    shortcut: 근사 탐색이라 재현율이 100%가 아니다. 오답이 min_wrong개 미만인 고득점자는
+    한계: 근사 탐색이라 재현율이 100%가 아니다. 오답이 min_wrong개 미만인 고득점자는
     후보가 되지 않는다. 오탐은 늘지 않는다 (판정은 모든 쌍 수로 본페로니 보정).
     """
     n, m = responses.shape
@@ -465,7 +465,7 @@ def speed_score(tau, scores):
     """실력 대비 속도: 점수가 같은 사람들보다 얼마나 빠른가 (강건 z, 클수록 빠름).
 
     실제 자격시험 데이터에서 업체가 사전유출로 의심한 응시자를 가장 잘 가려냈다 (AUC 약 0.77).
-    shortcut: 실제 속도 분포는 빠른 쪽 꼬리가 두꺼워 p값이 맞지 않는다 (정상 응시자 7~8%가 p<0.01).
+    한계: 실제 속도 분포는 빠른 쪽 꼬리가 두꺼워 p값이 맞지 않는다 (정상 응시자 7~8%가 p<0.01).
     그래서 판정에는 쓰지 않고 조사 우선순위 점수로만 낸다.
     """
     slope, intercept = np.polyfit(scores, tau, 1)
@@ -567,7 +567,7 @@ def analyze(responses, key, ai_runs=None, groups=None, prior=None, times=None, l
                 if groups is not None:
                     keep = groups[ia] != groups[ib]
                     ia, ib = ia[keep], ib[keep]
-                # shortcut: 판정 기준이 극도로 엄격(쌍 수십억)하므로 우도비 정밀 검정은 p<1e-4 후보만
+                # 판정 기준이 극도로 엄격(쌍 수십억)하므로 우도비 정밀 검정은 p<1e-4 후보만
                 cand = explicit_pairs(responses, key, probs, ia, ib, min(p_keep, 1e-4))[0]
                 out_lsh["candidates"] = len(ia)
             else:
